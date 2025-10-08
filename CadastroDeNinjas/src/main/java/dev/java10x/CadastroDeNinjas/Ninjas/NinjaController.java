@@ -1,5 +1,6 @@
 package dev.java10x.CadastroDeNinjas.Ninjas;
 
+import org.apache.el.lang.ELArithmetic;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,14 +35,14 @@ public class NinjaController {
         return ninjaService.listarNinjasPorId(id);
     }
 
-    @PutMapping("/alterarID")
-    public String alterarNinjaPorId() {
-        return "Alterar Ninja por ID";
+    @PutMapping("/alterar/{id}")
+    public NinjaModel alterarNinjaPorId(@PathVariable Long id, @RequestBody NinjaModel ninjaAtualizado) {
+        return ninjaService.atualizarNinja(id, ninjaAtualizado);
     }
 
-    @DeleteMapping("/deletarID")
-    public String deletarNinjaPorId() {
-        return "Ninja Deletado por ID";
+    @DeleteMapping("/deletar/{id}")
+    public void deletarNinjaPorId(@PathVariable Long id) {
+        ninjaService.deletarNinjaPorId(id);
     }
 
 }
