@@ -8,7 +8,7 @@ public class NinjaMapper {
     public NinjaModel map(NinjaDTO ninjaDTO) {
         NinjaModel ninjaModel = new NinjaModel();
         ninjaModel.setId(ninjaDTO.getId());
-        ninjaModel.setNome(ninjaModel.getNome());
+        ninjaModel.setNome(ninjaDTO.getNome());
         ninjaModel.setEmail(ninjaDTO.getEmail());
         ninjaModel.setIdade(ninjaDTO.getIdade());
         ninjaModel.setImgUrl(ninjaDTO.getImgUrl());
