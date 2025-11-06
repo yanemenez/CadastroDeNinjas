@@ -54,4 +54,30 @@ public class NinjaControllerUi {
         return "redirect:/ninjas/ui/listar";
     }
 
+    // Mostra o formulário de alteração de Ninja
+    @GetMapping("/alterar/{id}")
+    public String mostrarFormularioAlterarNinja(@PathVariable Long id, Model model) {
+        NinjaDTO ninja = ninjaService.listarNinjasPorId(id);
+        model.addAttribute("ninja", ninja);
+        return "alterarNinja"; // nome do template HTML (ex: alterarninja.html)
+    }
+
+    // Recebe o POST do formulário e salva a alteração
+    @PostMapping("/alterar/{id}")
+    public String alterarNinja(@PathVariable Long id, @ModelAttribute("ninja") NinjaDTO ninjaDTO, RedirectAttributes redirectAttributes) {
+
+        NinjaDTO ninjaAtualizado = ninjaService.atualizarNinja(id, ninjaDTO);
+
+        if (ninjaAtualizado != null) {
+            redirectAttributes.addFlashAttribute("mensagemSucesso", "Ninja alterado com sucesso!");
+        } else {
+            redirectAttributes.addFlashAttribute("mensagemErro", "Erro: Ninja não encontrado!");
+        }
+
+        return "redirect:/ninjas/ui/listar"; // redireciona para a lista de ninjas (ajuste se o seu caminho for diferente)
+    }
+
+
+
+
 }
